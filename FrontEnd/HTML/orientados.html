@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academia - Orientados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="dashboard-body">
+
+  <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="./dashboard.html">Academia Admin</a>
+      <div class="d-flex gap-2">
+        <a href="./dashboard.html" class="btn btn-light btn-sm">Volver al panel</a>
+        <a href="./index.html" class="btn btn-light btn-sm">Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+      <div>
+        <h1 class="fw-bold mb-1">Orientados</h1>
+        <p class="text-muted mb-0">Gestión de altas y consulta de orientados</p>
+      </div>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalOrientado">
+        + Nuevo orientado
+      </button>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-body">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-8">
+            <label for="buscarNombre" class="form-label">Buscar por nombre y apellido</label>
+            <input type="text" id="buscarNombre" class="form-control" placeholder="Ej: Juan Pérez">
+          </div>
+          <div class="col-md-4 d-grid">
+            <button class="btn btn-outline-primary" id="btnBuscar">Buscar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Nombre y apellido</th>
+                <th>Email</th>
+                <th>Programa</th>
+                <th>Orientador</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaOrientados">
+              <tr>
+                <td colspan="6" class="text-center text-muted">Cargando orientados...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Alta Orientado -->
+  <div class="modal fade" id="modalOrientado" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content border-0">
+        <div class="modal-header">
+          <h5 class="modal-title">Alta de orientado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form id="formOrientado">
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nombre y apellido</label>
+                <input type="text" class="form-control" id="nombreApellido" required maxlength="500">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Mail</label>
+                <input type="email" class="form-control" id="email" required maxlength="500">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="telefono" maxlength="50">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Programa</label>
+                <select class="form-select" id="programa" required>
+                  <option value="">Seleccionar</option>
+                  <option value="Orientación vocacional">Orientación vocacional</option>
+                  <option value="Reorientación vocacional">Reorientación vocacional</option>
+                  <option value="Taller de matemáticas">Taller de matemáticas</option>
+                  <option value="Métodos de estudio">Métodos de estudio</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Foto de perfil</label>
+                <input type="text" class="form-control" id="foto" placeholder="URL de imagen">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Número de documento</label>
+                <input type="text" class="form-control" id="documento" maxlength="50">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Edad</label>
+                <input type="number" class="form-control" id="edad">
+              </div>
+
+              <div class="col-md-8">
+                <label class="form-label">Colegio</label>
+                <input type="text" class="form-control" id="colegio" maxlength="500">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Domicilio</label>
+                <input type="text" class="form-control" id="domicilio" maxlength="500">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">¿Por qué se acerca a la institución?</label>
+                <textarea class="form-control" id="motivo" rows="3" maxlength="500"></textarea>
+              </div>
+            </div>
+
+            <div id="mensajeFormulario" class="mt-3"></div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar orientado</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalAsignarOrientador" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <h5 class="modal-title">Asignar orientador</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form id="formAsignarOrientador">
+        <div class="modal-body">
+          <input type="hidden" id="orientadoIdAsignar">
+
+          <div class="mb-3">
+            <label class="form-label">Orientado seleccionado</label>
+            <input type="text" class="form-control" id="nombreOrientadoAsignar" disabled>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Orientador</label>
+            <select class="form-select" id="selectOrientadorAsignar" required>
+              <option value="">Seleccionar orientador</option>
+            </select>
+          </div>
+
+          <div id="mensajeAsignacion"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar asignación</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../JS/api.js"></script>
+  <script src="../JS/orientados.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "proyecto-final---fullstack-developer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Backend/server.js",
+  "scripts": {
+    "start": "node Backend/server.js",
+    "dev": "nodemon Backend/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sequelize": "^6.37.8",
+    "sqlite3": "^5.1.7"
+  }
+}

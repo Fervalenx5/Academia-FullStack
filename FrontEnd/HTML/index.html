@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academia - Inicio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
+        <img src="./logo.png" alt="Logo">
+      </a>
+      <a href="./login.html" class="btn btn-primary btn-sm px-3">Ingresar al portal</a>
+    </div>
+  </nav>
+
+  <div id="bannerAcademia" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3500">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#bannerAcademia" data-bs-slide-to="0" class="active" aria-current="true"
+        aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#bannerAcademia" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#bannerAcademia" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="banner-slide banner-1">
+          <div class="banner-overlay"></div>
+          <div class="container banner-content text-center text-white">
+            <span class="badge rounded-pill bg-light text-dark px-3 py-2 mb-3">Orientación académica</span>
+            <h1 class="display-3 fw-bold">Descubrí tu camino</h1>
+            <p class="lead mb-4">Acompañamos a cada orientado en su proceso de decisión, aprendizaje y crecimiento.</p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="banner-slide banner-2">
+          <div class="banner-overlay"></div>
+          <div class="container banner-content text-center text-white">
+            <span class="badge rounded-pill bg-light text-dark px-3 py-2 mb-3">Programas disponibles</span>
+            <h1 class="display-3 fw-bold">Programas de orientación vocacional</h1>
+            <p class="lead mb-4">Explorá tus habilidades y fortalecé tu proyecto académico con acompañamiento
+              profesional.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="banner-slide banner-3">
+          <div class="banner-overlay"></div>
+          <div class="container banner-content text-center text-white">
+            <span class="badge rounded-pill bg-light text-dark px-3 py-2 mb-3">Acompañamiento integral</span>
+            <h1 class="display-3 fw-bold">Talleres y métodos de estudio</h1>
+            <p class="lead mb-4">Brindamos herramientas concretas para mejorar el rendimiento y la organización
+              académica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerAcademia" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerAcademia" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Nuestra misión</h2>
+      <p class="text-center w-75 mx-auto">
+        Brindar orientación, acompañamiento y herramientas a estudiantes y orientados,
+        favoreciendo su desarrollo académico y personal a través de un espacio de apoyo integral.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">¿Cuál es nuestra propuesta?</h2>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100 border-0 card-hover">
+            <div class="card-body text-center">
+              <h5 class="card-title">Orientación Vocacional</h5>
+              <p class="card-text">Acompañamiento para descubrir intereses, habilidades y proyectos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100 border-0 card-hover">
+            <div class="card-body text-center">
+              <h5 class="card-title">Reorientación</h5>
+              <p class="card-text">Espacios para repensar decisiones y redefinir caminos académicos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100 border-0 card-hover">
+            <div class="card-body text-center">
+              <h5 class="card-title">Taller de Matemáticas</h5>
+              <p class="card-text">Refuerzo de contenidos con enfoque práctico y acompañamiento constante.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card shadow-sm h-100 border-0 card-hover">
+            <div class="card-body text-center">
+              <h5 class="card-title">Métodos de Estudio</h5>
+              <p class="card-text">Herramientas para organizar, comprender y potenciar el aprendizaje.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Novedades</h2>
+      <div class="row g-4" id="contenedorNovedades">
+        <div class="col-12 text-center text-muted">
+          Cargando novedades...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 text-center footer-custom">
+    <div class="container">
+      <p class="mb-0">© 2026 Academia - Plataforma de Gestión</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    async function cargarNovedades() {
+      const contenedor = document.getElementById("contenedorNovedades");
+
+      try {
+        const response = await fetch("http://localhost:3000/novedades");
+        const novedades = await response.json();
+
+        if (!novedades || novedades.length === 0) {
+          contenedor.innerHTML = `
+          <div class="col-12 text-center text-muted">
+            No hay novedades disponibles.
+          </div>
+        `;
+          return;
+        }
+
+        contenedor.innerHTML = novedades.map(novedad => `
+        <div class="col-md-4">
+          <div class="card shadow-sm border-0 h-100 card-hover">
+            <div class="card-body">
+              <h5 class="card-title">${novedad.titulo}</h5>
+              <p class="card-text text-muted">${novedad.descripcion}</p>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      } catch (error) {
+        contenedor.innerHTML = `
+        <div class="col-12 text-center text-danger">
+          Error al cargar novedades.
+        </div>
+      `;
+      }
+    }
+
+    cargarNovedades();
+  </script>
+</body>
+
+</html>

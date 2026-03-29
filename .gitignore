@@ -1,0 +1,6 @@
+node_modules/
+database.sqlite
+
+# Archivos de sistema operativo (útil si pasas entre Mac y Windows)
+.DS_Store
+Thumbs.db
