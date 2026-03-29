@@ -6,15 +6,15 @@
   --primary-dark: #0b3d91;
   --secondary-color: #3b82f6;
   --accent-color: #1e40af;
-  
+
   /* Backgrounds */
   --bg-light: #f8fafc;
   --bg-white: #ffffff;
-  
+
   /* Text Colors */
   --text-main: #1e293b;
   --text-muted: #64748b;
-  
+
   /* Shadows - Estilo premium Apple/Stripe */
   --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
@@ -25,7 +25,7 @@
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-pill: 9999px;
-  
+
   /* Transitions */
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -40,11 +40,19 @@ body {
 
 /* ================= NAV ================= */
 .custom-navbar {
-  background: rgba(11, 61, 145, 0.85); /* Semitransparente oscuro */
-  backdrop-filter: blur(12px);         /* Glassmorphism */
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* Fondo premium consistente con el tema global para todas las páginas internas */
+  background: linear-gradient(135deg, #091e4a, #1e3a8a);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
   transition: var(--transition-smooth);
+}
+
+.navbar-glass {
+  /* Efecto de cristal exclusivo diseñado para lucir sobre las fotos del index */
+  background: rgba(11, 29, 66, 0.55) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: none;
 }
 
 .navbar {
@@ -53,25 +61,38 @@ body {
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .navbar-brand {
   color: var(--bg-white) !important;
-  font-size: 1.5rem;
-  letter-spacing: -0.5px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0px;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-brand img {
-  height: 60px; /* Tamaño más moderno */
+  /* Tamaño refinado para el logo */
+  height: 80px;
   width: auto;
   object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  /* Sombra suave para darle presencia */
   transition: var(--transition-smooth);
 }
 
 .navbar-brand:hover img {
-  transform: scale(1.05);
+  transform: scale(1.03);
+  filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.15));
 }
 
 /* ================= BUTTONS ================= */
@@ -95,7 +116,10 @@ body {
 .btn-premium::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
   opacity: 0;
   transition: var(--transition-smooth);
@@ -160,7 +184,8 @@ body {
 /* ================= BANNER / CAROUSEL ================= */
 .banner-slide {
   position: relative;
-  height: 85vh; /* Aumentado para mayor impacto visual */
+  height: 85vh;
+  /* Aumentado para mayor impacto visual */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,14 +194,25 @@ body {
 
 .banner-overlay {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(180deg, rgba(11, 61, 145, 0.7) 0%, rgba(13, 110, 253, 0.4) 100%);
   z-index: 1;
 }
 
-.banner-1 { background: linear-gradient(135deg, #0d3269, #1e40af); }
-.banner-2 { background: linear-gradient(135deg, #0f2c7a, #1e3a8a); }
-.banner-3 { background: linear-gradient(135deg, #0b2259, #2563eb); }
+.banner-1 {
+  background: linear-gradient(135deg, #0d3269, #1e40af);
+}
+
+.banner-2 {
+  background: linear-gradient(135deg, #0f2c7a, #1e3a8a);
+}
+
+.banner-3 {
+  background: linear-gradient(135deg, #0b2259, #2563eb);
+}
 
 .banner-content {
   position: relative;
@@ -187,7 +223,7 @@ body {
 .banner-content h1 {
   font-weight: 800;
   letter-spacing: -1.5px;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   margin-bottom: 1.5rem;
 }
 
@@ -195,7 +231,7 @@ body {
   font-size: 1.25rem;
   font-weight: 300;
   opacity: 0.95;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .badge-premium {
@@ -226,8 +262,15 @@ body {
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ================= SECTIONS ================= */
@@ -269,8 +312,8 @@ section p.text-center.w-75 {
 
 .footer-custom {
   background-color: #0b1d42;
-  color: rgba(255,255,255,0.7);
-  border-top: 1px solid rgba(255,255,255,0.05);
+  color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   font-size: 0.9rem;
 }
 
@@ -311,7 +354,7 @@ section p.text-center.w-75 {
   bottom: 0;
   background: white;
   z-index: 1;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .perfil-card {
@@ -324,7 +367,7 @@ section p.text-center.w-75 {
   display: flex;
   align-items: center;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: #f8fafc;
   transition: var(--transition-smooth);
 }
@@ -342,15 +385,38 @@ section p.text-center.w-75 {
 }
 
 /* Scrollbar premium */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-light); }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .banner-slide { height: 75vh; }
-  .banner-content h1 { font-size: 2.5rem; }
-  .banner-content .lead { font-size: 1rem; }
-  .card-body { padding: 2rem 1.25rem; }
+  .banner-slide {
+    height: 75vh;
+  }
+
+  .banner-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .banner-content .lead {
+    font-size: 1rem;
+  }
+
+  .card-body {
+    padding: 2rem 1.25rem;
+  }
 }
