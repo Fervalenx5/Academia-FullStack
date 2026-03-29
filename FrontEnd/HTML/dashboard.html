@@ -7,6 +7,8 @@
   <title>Academia - Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="dashboard-body">
@@ -80,14 +82,51 @@
     </div>
   </div>
 
-  <div class="card border-0 shadow-sm">
-    <div class="card-body">
-      <h4 class="mb-3">Novedades</h4>
-      <ul class="mb-0">
-        <li>Nuevo período de inscripción abierto para orientados.</li>
-        <li>Se habilitaron nuevos talleres y actividades de acompañamiento.</li>
-        <li>Recordatorio: revisar eventos programados de la semana.</li>
-      </ul>
+  <div class="row g-4 mt-2">
+    <!-- Columna del Gráfico -->
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm dashboard-card h-100">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <h4 class="fw-bold mb-0" style="color: var(--primary-dark);">Estadísticas de ingresos</h4>
+            <div class="d-flex align-items-center gap-2">
+              <label for="filtroMesChart" class="text-muted small mb-0 d-none d-sm-block">Filtrar:</label>
+              <select id="filtroMesChart" class="form-select form-select-sm shadow-sm" style="min-width: 140px; border-radius: 8px;">
+                <option value="todos">Todos los meses</option>
+                <option value="0">Enero</option>
+                <option value="1">Febrero</option>
+                <option value="2">Marzo</option>
+                <option value="3">Abril</option>
+                <option value="4">Mayo</option>
+                <option value="5">Junio</option>
+                <option value="6">Julio</option>
+                <option value="7">Agosto</option>
+                <option value="8">Septiembre</option>
+                <option value="9">Octubre</option>
+                <option value="10">Noviembre</option>
+                <option value="11">Diciembre</option>
+              </select>
+            </div>
+          </div>
+          <div style="position: relative; height: 320px; width: 100%;">
+            <canvas id="ingresosChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Columna de Novedades (Lateral) -->
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm dashboard-card h-100 card-hover">
+        <div class="card-body p-4">
+          <h4 class="fw-bold mb-4" style="color: var(--primary-dark);">Novedades rápidas</h4>
+          <ul class="mb-0 text-muted d-flex flex-column gap-4" style="padding-left: 1rem;">
+            <li><strong class="text-dark">Nuevo período:</strong> Inscripción abierta para orientados. Verificar agenda grupal.</li>
+            <li><strong class="text-dark">Actualización:</strong> Se habilitaron nuevos talleres y actividades de acompañamiento intensivo.</li>
+            <li><strong class="text-dark">Aviso general:</strong> Recordá revisar y aprobar eventos programados de la semana entrante.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   </div>
@@ -113,6 +152,143 @@
         window.location.href = "./index.html";
       });
     }
+
+    let ingresosChartInstancia = null;
+    let datosOrientadosGlobal = [];
+
+    async function cargarDatosOrientados() {
+      try {
+        const respuesta = await fetch("http://localhost:3000/orientados");
+        datosOrientadosGlobal = await respuesta.json();
+        
+        // Renderizar inicial (vista semestral/anual por meses)
+        dibujarGrafico("todos");
+
+        // Activar el "escuchador de eventos" para cuando elijas un mes nuevo
+        const selectorMes = document.getElementById("filtroMesChart");
+        if(selectorMes) {
+          selectorMes.addEventListener("change", (e) => {
+            dibujarGrafico(e.target.value);
+          });
+        }
+      } catch (err) {
+        console.error("No se pudo cargar la info de ingresos:", err);
+      }
+    }
+
+    function dibujarGrafico(mesSeleccionado) {
+      const mesesNombres = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+      
+      let etiquetas = [];
+      let valores = [];
+      let rotuloTooltip = ' Nuevos orientados registrados';
+
+      if (mesSeleccionado === "todos") {
+        // --- LÓGICA VISTA GENERAL (POR MESES) ---
+        const ingresosPorMes = {};
+        datosOrientadosGlobal.forEach(estudiante => {
+          let fecha = new Date(estudiante.createdAt);
+          if (isNaN(fecha.getTime())) fecha = new Date();
+          const mesTexto = mesesNombres[fecha.getMonth()];
+          ingresosPorMes[mesTexto] = (ingresosPorMes[mesTexto] || 0) + 1;
+        });
+
+        // Asegurar el correcto orden cronológico
+        mesesNombres.forEach(m => {
+          if (ingresosPorMes[m]) {
+            etiquetas.push(m);
+            valores.push(ingresosPorMes[m]);
+          }
+        });
+
+        if (etiquetas.length === 0) {
+          etiquetas = [mesesNombres[new Date().getMonth()]];
+          valores = [0];
+        }
+      } else {
+        // --- LÓGICA VISTA DETALLADA (DÍA A DÍA, EFECTO ZOOM) ---
+        const mesIndex = parseInt(mesSeleccionado);
+        const añoActual = new Date().getFullYear();
+        const diasDelMes = new Date(añoActual, mesIndex + 1, 0).getDate(); // calcula total de días (28, 30 o 31)
+        
+        // Creamos una lista temporal de ceros para cada posible día del mes
+        const ingresosDiarios = Array(diasDelMes + 1).fill(0); 
+
+        datosOrientadosGlobal.forEach(estudiante => {
+          let fecha = new Date(estudiante.createdAt);
+          if (isNaN(fecha.getTime())) fecha = new Date();
+          
+          if (fecha.getMonth() === mesIndex) {
+            ingresosDiarios[fecha.getDate()] += 1;
+          }
+        });
+
+        // Poblamos las X y las Y del gráfico para que salgan del 1 al 31...
+        for(let dia = 1; dia <= diasDelMes; dia++) {
+          etiquetas.push(dia + " de " + mesesNombres[mesIndex]);
+          valores.push(ingresosDiarios[dia]);
+        }
+        rotuloTooltip = ' Ingresos en este día';
+      }
+
+      // IMPORTANTE: Chart.js prohíbe pintar un gráfico arriba de otro. Hay que "Destruirlo" antes de actualizar su vista.
+      if (ingresosChartInstancia) {
+        ingresosChartInstancia.destroy();
+      }
+
+      const canvasRef = document.getElementById('ingresosChart').getContext('2d');
+      const gradientFill = canvasRef.createLinearGradient(0, 0, 0, 400);
+      gradientFill.addColorStop(0, 'rgba(13, 110, 253, 0.9)');
+      gradientFill.addColorStop(1, 'rgba(13, 110, 253, 0.15)');
+
+      ingresosChartInstancia = new Chart(canvasRef, {
+        type: 'bar',
+        data: {
+          labels: etiquetas,
+          datasets: [{
+            label: rotuloTooltip,
+            data: valores,
+            backgroundColor: gradientFill,
+            borderColor: '#0d6efd',
+            borderWidth: 2,
+            borderRadius: 6,
+            barThickness: mesSeleccionado === "todos" ? 50 : 15, // Barras finitas si mostramos los 31 días juntos
+            hoverBackgroundColor: '#0b3d91'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(9, 30, 74, 0.95)',
+              titleFont: { family: "'Outfit', sans-serif", size: 14, weight: 'bold' },
+              bodyFont: { family: "'Outfit', sans-serif", size: 14 },
+              padding: 12,
+              cornerRadius: 8,
+              displayColors: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: 'rgba(0, 0, 0, 0.04)', drawBorder: false },
+              ticks: { stepSize: 1, font: { family: "'Outfit', sans-serif", color: '#64748b' } }
+            },
+            x: {
+              grid: { display: false, drawBorder: false },
+              ticks: { 
+                font: { family: "'Outfit', sans-serif", color: '#64748b', weight: '500' },
+                maxTicksLimit: mesSeleccionado === "todos" ? 12 : 8 // Evita que se amontonen las letras de los 31 días
+              }
+            }
+          }
+        }
+      });
+    }
+
+    cargarDatosOrientados();
   </script>
 </body>
 

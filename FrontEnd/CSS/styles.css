@@ -41,34 +41,40 @@ body {
 /* ================= NAV ================= */
 .custom-navbar {
   /* Fondo premium consistente con el tema global para todas las páginas internas */
-  background: linear-gradient(135deg, #091e4a, #1e3a8a);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(9, 30, 74, 0.95), rgba(30, 58, 138, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: var(--transition-smooth);
+  border-radius: var(--radius-pill);
 }
 
 .navbar-glass {
   /* Efecto de cristal exclusivo diseñado para lucir sobre las fotos del index */
-  background: rgba(11, 29, 66, 0.55) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: none;
+  background: rgba(11, 29, 66, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .navbar {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1200px;
   z-index: 1000;
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
+  padding: 0.6rem 1.5rem;
 }
 
 .navbar .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0;
 }
 
 .navbar-brand {
@@ -81,8 +87,8 @@ body {
 }
 
 .navbar-brand img {
-  /* Tamaño refinado para el logo */
-  height: 80px;
+  /* Tamaño refinado y minimalista para el logo */
+  height: 70px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
@@ -93,6 +99,30 @@ body {
   transform: scale(1.03);
   filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.15));
 }
+
+.navbar-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(to right,
+      #ffffff 20%,
+      #a5c8ff 40%,
+      #a5c8ff 60%,
+      #ffffff 80%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 4s linear infinite;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
 
 /* ================= BUTTONS ================= */
 .btn-premium {
@@ -159,7 +189,38 @@ body {
 .dashboard-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(13, 110, 253, 0.1) !important;
+  border-color: rgba(13, 110, 253, 0.4) !important;
+}
+
+.card-hover:hover .icon-glow {
+  transform: scale(1.15) rotate(5deg);
+  text-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
+}
+
+.icon-container {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(11, 61, 145, 0.02));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  border: 1px solid rgba(13, 110, 253, 0.1);
+}
+
+.card-hover:hover .icon-container {
+  background: linear-gradient(135deg, rgba(13, 110, 253, 0.15), rgba(11, 61, 145, 0.1));
+  border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+.icon-glow {
+  transition: var(--transition-smooth);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .card-title {
@@ -273,6 +334,24 @@ body {
 }
 
 /* ================= SECTIONS ================= */
+.mission-overlap-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 3.5rem 2rem;
+  margin-top: -80px;
+  position: relative;
+  z-index: 10;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 768px) {
+  .mission-overlap-card {
+    padding: 2.5rem 1rem;
+    margin-top: -50px;
+  }
+}
+
 section h2 {
   font-weight: 800;
   color: var(--primary-dark);
@@ -310,10 +389,22 @@ section p.text-center.w-75 {
 }
 
 .footer-custom {
-  background-color: #0b1d42;
+  background: linear-gradient(135deg, #091e4a, #1e3a8a);
   color: rgba(255, 255, 255, 0.7);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.95rem;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.footer-link {
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.footer-link:hover {
+  color: #ffffff !important;
+  transform: translateX(6px);
+  display: inline-block;
 }
 
 .login-body {

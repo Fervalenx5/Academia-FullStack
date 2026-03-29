@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Academia - Inicio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 
@@ -16,6 +17,7 @@
       <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
         <img src="./logo.png" alt="Logo">
       </a>
+      <h1 class="navbar-title m-0">Academy</h1>
       <a href="./login.html" class="btn btn-premium btn-sm px-3">Ingresar al portal</a>
     </div>
   </nav>
@@ -77,13 +79,15 @@
     </button>
   </div>
 
-  <section class="py-5 bg-light">
+  <section class="pb-5 bg-light">
     <div class="container">
-      <h2 class="text-center mb-4">Nuestra misión</h2>
-      <p class="text-center w-75 mx-auto">
-        Brindar orientación, acompañamiento y herramientas a estudiantes y orientados,
-        favoreciendo su desarrollo académico y personal a través de un espacio de apoyo integral.
-      </p>
+      <div class="mission-overlap-card">
+        <h2 class="text-center mb-4">Nuestra misión</h2>
+        <p class="text-center w-75 mx-auto mb-0">
+          Brindar orientación, acompañamiento y herramientas a estudiantes y orientados,
+          favoreciendo su desarrollo académico y personal a través de un espacio de apoyo integral.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -93,32 +97,44 @@
       <div class="row g-4">
         <div class="col-md-3">
           <div class="card h-100 border-0 card-hover">
-            <div class="card-body text-center">
-              <h5 class="card-title">Orientación Vocacional</h5>
+            <div class="card-body text-center position-relative">
+              <div class="icon-container mb-3 text-primary mx-auto">
+                <i class="bi bi-compass-fill fs-1 icon-glow"></i>
+              </div>
+              <h5 class="card-title fw-bold">Orientación Vocacional</h5>
               <p class="card-text">Acompañamiento para descubrir intereses, habilidades y proyectos.</p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card h-100 border-0 card-hover">
-            <div class="card-body text-center">
-              <h5 class="card-title">Reorientación</h5>
+            <div class="card-body text-center position-relative">
+              <div class="icon-container mb-3 text-primary mx-auto">
+                <i class="bi bi-arrow-repeat fs-1 icon-glow"></i>
+              </div>
+              <h5 class="card-title fw-bold">Reorientación</h5>
               <p class="card-text">Espacios para repensar decisiones y redefinir caminos académicos.</p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card h-100 border-0 card-hover">
-            <div class="card-body text-center">
-              <h5 class="card-title">Taller de Matemáticas</h5>
+            <div class="card-body text-center position-relative">
+              <div class="icon-container mb-3 text-primary mx-auto">
+                <i class="bi bi-calculator-fill fs-1 icon-glow"></i>
+              </div>
+              <h5 class="card-title fw-bold">Taller de Matemáticas</h5>
               <p class="card-text">Refuerzo de contenidos con enfoque práctico y acompañamiento constante.</p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card h-100 border-0 card-hover">
-            <div class="card-body text-center">
-              <h5 class="card-title">Métodos de Estudio</h5>
+            <div class="card-body text-center position-relative">
+              <div class="icon-container mb-3 text-primary mx-auto">
+                <i class="bi bi-journal-bookmark-fill fs-1 icon-glow"></i>
+              </div>
+              <h5 class="card-title fw-bold">Métodos de Estudio</h5>
               <p class="card-text">Herramientas para organizar, comprender y potenciar el aprendizaje.</p>
             </div>
           </div>
@@ -138,9 +154,36 @@
     </div>
   </section>
 
-  <footer class="py-4 text-center footer-custom">
+  <footer class="footer-custom pt-5 pb-4">
     <div class="container">
-      <p class="mb-0">© 2026 Academia - Plataforma de Gestión</p>
+      <div class="row gy-4 mb-4 text-start">
+        <div class="col-md-5">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img src="./logo.png" alt="Logo" height="40" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+            <span class="fs-4 fw-bold text-white">Academy</span>
+          </div>
+          <p class="text-white-50">Orientando el futuro desde el primer día. Te brindamos el apoyo y las herramientas
+            que necesitas para tu desarrollo académico y personal.</p>
+        </div>
+        <div class="col-md-3 offset-md-1">
+          <h5 class="text-white fw-bold mb-3">Enlaces rápidos</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="#" class="text-white-50 text-decoration-none footer-link">Inicio</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none footer-link">Nuestra propuesta</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none footer-link">Novedades</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5 class="text-white fw-bold mb-3">Portal</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="./login.html" class="text-white-50 text-decoration-none footer-link">Ingresar como Admin</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-top border-secondary pt-4 text-center mt-3">
+        <p class="mb-0 text-white-50">© 2026 Academia - Plataforma de Gestión. Todos los derechos reservados.</p>
+      </div>
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
